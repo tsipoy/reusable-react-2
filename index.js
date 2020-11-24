@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Badge = () => {
-	return <span>Hello, world!</span>;
+const CharacterCounterInput = ({ text, defaults }) => {
+	const maxLength = 280;
+
+	return (
+		<div className="counterInput">
+			<div>
+				{defaults.map(b => {
+					return <button key={b}>{b}</button>;
+				})}
+			</div>
+			<textarea placeholder={text} />
+			<div>0/{maxLength}</div>
+		</div>
+	);
 };
 
 const App = () => {
+	let defaultMoods = ['Great', 'Okay', 'Bad'];
+
 	return (
 		<section>
-			<h1>Check out these badges!</h1>
-			<Badge color="green">Success</Badge> This is operational. <br />
-			<Badge color="red">Removed</Badge> This is critical. <br />
-			<Badge color="yellow">Warning</Badge> This is a warning. <br />
-			<Badge color="blue">Beta</Badge> This is in progress. <br />
+			<h2>Mood Tracker</h2>
+			<CharacterCounterInput text={'How was your day?'} defaults={defaultMoods} />
 		</section>
 	);
 };
 
-const domElement = document.getElementById('root');
-ReactDOM.render(<App />, domElement);
+ReactDOM.render(<App />, document.getElementById('root'));
